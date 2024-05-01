@@ -1,0 +1,90 @@
+body, html {
+    margin: 0;
+    box-sizing: border-box;
+    height: 100%;
+    --tc-main: black;
+    --tc-accent: white;
+    --bg-main: white;
+    --bg-accent: hsl(0, 0%, 28%);
+    --tc-main-alt: white;
+    --tc-accent-alt: black;
+    --bg-main-alt: hsl(0, 0%, 28%);
+    --bg-accent-alt: white;
+}
+
+#headings {
+    font-size: 32pt;
+    letter-spacing: 10pt;
+}
+
+.screen {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+
+.roboto-medium {
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+}
+
+.roboto-bold {
+    font-family: "Roboto", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+}
+
+.roboto-black {
+    font-family: "Roboto", sans-serif;
+    font-weight: 900;
+    font-style: normal;
+}
+  
+.quad {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+}
+
+.center {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.tc-main {
+    color: var(--tc-main);
+}
+
+.tc-accent {
+    color: var(--tc-accent);
+}
+
+.bg-main {
+    background-color: var(--bg-main);
+}
+
+.bg-accent {
+    background-color: var(--bg-accent);
+}
+
+.br-border {
+    border-right: dashed;
+    border-bottom: dashed;
+}
+
+.bl-border {
+    border-left: dashed;
+    border-bottom: dashed;
+}
+
+.tl-border {
+    border-top: dashed;
+    border-left: dashed;
+}
+
+.tr-border {
+    border-top: dashed;
+    border-right: dashed;
+}
