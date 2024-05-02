@@ -1,12 +1,13 @@
 :root{
-    --tc-main: black;
-    --tc-accent: hsl(0, 0%, 59%);
+    --tc-main: hsl(250, 40%, 80%);
+    --tc-accent: hsl(0, 0%, 93%);
     --bg-main: hsl(0, 0%, 100%);
-    --bg-accent: hsl(0, 0%, 28%);
+    /* --bg-accent: hsl(0, 0%, 24%); */
+    --bg-accent: hsl(250, 40%, 59%);
     --tc-main-alt: hsl(0, 0%, 59%);
     --tc-accent-alt: black;
     --bg-main-alt: hsl(0, 0%, 7%);
-    --bg-accent-alt: white;
+    --bg-accent-alt: hsl(0, 0%, 71%);
 }
 
 body, html {
@@ -21,11 +22,35 @@ body, html {
     letter-spacing: 10pt;
 }
 
+.thin {
+    min-width: 0 !important;
+}
+
 .task {
-    width: 16em;
-    height: 16em;
-    border-radius: 2em;
+    transition-property: min-width, height;
+    transition-duration: 1s;
+    padding-left: 1em;
+    padding-right: 1em;
+    min-width: 20em;
+    height: 2em;
+    border-radius: 1em;
     position: absolute;
+}
+
+.ui-button {
+    width: 5em;
+    height: 5em;
+    border-radius: 2.5em;
+    margin: 1em;
+}
+
+
+.draggable {
+    cursor: grab;
+}
+
+.draggable:active {
+    cursor: grabbing;
 }
 
 .screen {
@@ -76,12 +101,26 @@ body, html {
     background-color: var(--bg-main);
 }
 
+.bg-main-alt {
+    background-color: var(--bg-main-alt);
+}
+
 .bg-accent {
     background-color: var(--bg-accent);
 }
 
 .dashed {
-    outline: 0.125em dashed var(--tc-main);
+    outline: 0.125em dashed var(--bg-accent);
     outline-offset: -0.0625em;
+}
 
+.br {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
+
+.col {
+    display: flex;
+    flex-direction: column;
 }

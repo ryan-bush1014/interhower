@@ -20,26 +20,21 @@ function dark_mode() {
     root.style.setProperty('--bg-accent-alt', bg_accent);
 }
 
-
-
-
-
-
-
-
 let target = false;
 
 function add_drag() {
     existing = document.querySelectorAll('.draggable').length;
-    drag = document.createElement("div");
-    drag.innerText = existing;
-    drag.classList.add("draggable");
-    drag.classList.add("task");
-    drag.classList.add("bg-accent");
-    drag.classList.add("center");
+    drag = document.createElement('div');
+    drag.innerText = prompt('Task info?');
+    drag.classList.add('thin');
+    drag.classList.add('draggable');
+    drag.classList.add('task');
+    drag.classList.add('bg-accent');
+    drag.classList.add('center');
     drag.style['z-index'] = existing;
     drag.clicked = false;
     main.appendChild(drag);
+    setTimeout(() => {drag.classList.remove('thin')}, 50);
 }
 
 main.addEventListener('mousedown', (e) => {
