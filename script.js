@@ -1,8 +1,19 @@
 let root = document.querySelector(':root');
 let main = document.querySelector('#main');
 
+function prevent_enter(e) {
+    // User hits enter key
+    if (e.keyCode === 13) {
+        e.preventDefault();
+        window.getSelection().removeAllRanges();
+        e.target.blur();
+    }
+}
+
 function dark_mode() {
-    root_s = getComputedStyle(root);
+    let butt = document.querySelector('#dm');
+    butt.innerText = (butt.innerText == '☼')? '☽' : '☼';
+    let root_s = getComputedStyle(root);
     tc_main = root_s.getPropertyValue('--tc-main');
     tc_accent = root_s.getPropertyValue('--tc-accent');
     bg_main = root_s.getPropertyValue('--bg-main');
@@ -25,22 +36,22 @@ let target = false;
 function add_drag() {
     existing = document.querySelectorAll('.draggable').length;
     drag = document.createElement('div');
-    drag.innerText = prompt('Task info?');
-    drag.classList.add('thin');
+    drag.innerHTML = '<span contenteditable onkeydown="prevent_enter(event)" class="taskname" placeholder="Task title"></span><div class="mover center">✥</div>';
+    // drag.classList.add('thin');
     drag.classList.add('draggable');
     drag.classList.add('task');
     drag.classList.add('bg-accent');
-    drag.classList.add('center');
     drag.style['z-index'] = existing;
     drag.clicked = false;
     main.appendChild(drag);
-    setTimeout(() => {drag.classList.remove('thin')}, 50);
+    // setTimeout(() => {drag.classList.remove('thin')}, 50);
 }
 
 main.addEventListener('mousedown', (e) => {
-    target = e.target;
-    target.offsetX = e.offsetX;
-    target.offsetY = e.offsetY;
+    if (!e.target.classList.contains('mover')) return;
+    target = e.target.parentElement;
+    target.offsetX = e.clientX - target.getBoundingClientRect().left;
+    target.offsetY = e.clientY - target.getBoundingClientRect().top;
     drags = document.querySelectorAll('.draggable');
     for (let j = 0; j < drags.length; ++j) {
         if (drags[j].style['z-index'] > target.style['z-index']) {
@@ -56,6 +67,12 @@ document.addEventListener('mouseup', (e) => {
 
 document.addEventListener('mousemove', (e) => {
     if (target) {
-        target.style['transform'] = `translate(${e.clientX - target.offsetX}px, ${e.clientY - target.offsetY}px)`;
+        target.style['transform'] = `translate(clamp(0vw, ${100*(e.clientX - target.offsetX) / window.innerWidth}vw, calc(100vw - 100%)), clamp(0vh, ${100*(e.clientY - target.offsetY) / window.innerHeight}vh, calc(100vh - 100%)))`;
     }
 });
+
+function hide_toggle() {
+    for (elem of document.querySelectorAll('.trtrans')) {
+        elem.classlist.contains('hidden-down')? elem.classList.remove('hidden-down') : elem.classList.add('hidden-down');
+    }
+}

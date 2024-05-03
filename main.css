@@ -18,39 +18,72 @@ body, html {
 }
 
 #headings {
-    font-size: 32pt;
-    letter-spacing: 10pt;
+    font-size: min(4vw, 2.5em);
+}
+
+#headings * {
+    letter-spacing: 0.4em;
+}
+
+.task {
+    padding-left: 1em;
+    padding-right: 1em;
+    padding-top: 0.25em;
+    padding-bottom: 0.25em;
+    min-width: clamp(2em, 20vw, 20em);
+    height: 2em;
+    border-radius: 1000vh;
+    position: absolute;
+    display: inline-flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.taskname {
+    min-width: 1em;
+    display: inline-block;
+    cursor: text;
+}
+
+[placeholder]:empty::before {
+    content: attr(placeholder);
+    opacity: 0.6;
+}
+
+[placeholder]:empty:focus::before {
+    content: "";
 }
 
 .thin {
     min-width: 0 !important;
 }
 
-.task {
-    transition-property: min-width, height;
-    transition-duration: 1s;
-    padding-left: 1em;
-    padding-right: 1em;
-    min-width: 20em;
-    height: 2em;
-    border-radius: 1em;
-    position: absolute;
+.mover {
+    width: 1em;
+    height: 1em;
+    font-size: 18pt;
+    cursor: grab;
+    padding: 0.2em;
+    border-radius: 1000vh;
+}
+
+.mover:hover{
+    background-color: rgba(100,100,100,0.5);
+}
+
+.mover:active {
+    cursor: grabbing;
 }
 
 .ui-button {
-    width: 5em;
-    height: 5em;
-    border-radius: 2.5em;
-    margin: 1em;
-}
-
-
-.draggable {
-    cursor: grab;
-}
-
-.draggable:active {
-    cursor: grabbing;
+    font-size: 24pt;
+    width: 2.5em;
+    height: 2.5em;
+    border-radius: 1em;
+    margin: 0.25em;
+    border: none;
+    cursor: pointer;
 }
 
 .screen {
@@ -118,6 +151,28 @@ body, html {
     position: absolute;
     right: 0;
     bottom: 0;
+}
+
+.tm {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.lm {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.trtrans {
+    transition: transform 500ms;
+}
+
+.hidden-down {
+    transform: translateY(100%);
 }
 
 .col {
