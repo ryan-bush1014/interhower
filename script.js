@@ -18,17 +18,23 @@ function dark_mode() {
     tc_accent = root_s.getPropertyValue('--tc-accent');
     bg_main = root_s.getPropertyValue('--bg-main');
     bg_accent = root_s.getPropertyValue('--bg-accent');
+    bg_contrast = root_s.getPropertyValue('--bg-contrast');
+    tc_contrast = root_s.getPropertyValue('--tc-contrast');
     console.log(tc_main);
 
     root.style.setProperty('--tc-main', root_s.getPropertyValue('--tc-main-alt'));
     root.style.setProperty('--tc-accent', root_s.getPropertyValue('--tc-accent-alt'));
     root.style.setProperty('--bg-main', root_s.getPropertyValue('--bg-main-alt'));
     root.style.setProperty('--bg-accent', root_s.getPropertyValue('--bg-accent-alt'));
+    root.style.setProperty('--bg-contrast', root_s.getPropertyValue('--bg-contrast-alt'));
+    root.style.setProperty('--tc-contrast', root_s.getPropertyValue('--tc-contrast-alt'));
 
     root.style.setProperty('--tc-main-alt', tc_main);
     root.style.setProperty('--tc-accent-alt', tc_accent);
     root.style.setProperty('--bg-main-alt', bg_main);
     root.style.setProperty('--bg-accent-alt', bg_accent);
+    root.style.setProperty('--bg-contrast-alt', bg_contrast);
+    root.style.setProperty('--tc-contrast-alt', tc_contrast);
 }
 
 let target = false;
@@ -36,29 +42,35 @@ let target = false;
 function add_drag() {
     existing = document.querySelectorAll('.draggable').length;
     drag = document.createElement('div');
-    drag.innerHTML = '<span contenteditable onkeydown="prevent_enter(event)" class="taskname" placeholder="Task title"></span><div class="mover center">✥</div>';
+    drag.innerHTML = '<span contenteditable onkeydown="prevent_enter(event)" class="taskname" placeholder="Task title"></span><div class="mover center">✥</div><textarea class="taskinfo contrast" placeholder="Task info"></textarea>';
     // drag.classList.add('thin');
     drag.classList.add('draggable');
     drag.classList.add('task');
     drag.classList.add('bg-accent');
-    drag.style['z-index'] = existing;
+    drag.style['z-index'] = existing + 1;
     drag.clicked = false;
     main.appendChild(drag);
     // setTimeout(() => {drag.classList.remove('thin')}, 50);
 }
 
 main.addEventListener('mousedown', (e) => {
-    if (!e.target.classList.contains('mover')) return;
-    target = e.target.parentElement;
-    target.offsetX = e.clientX - target.getBoundingClientRect().left;
-    target.offsetY = e.clientY - target.getBoundingClientRect().top;
+    t = e.target;
+    while (!t.classList.contains('draggable')) {
+        t = t.parentElement;
+    }
     drags = document.querySelectorAll('.draggable');
     for (let j = 0; j < drags.length; ++j) {
-        if (drags[j].style['z-index'] > target.style['z-index']) {
+        if (drags[j].style['z-index'] > t.style['z-index']) {
             drags[j].style['z-index'] -= 1;
         }
     }
-    target.style['z-index'] = drags.length - 1;
+    t.style['z-index'] = drags.length;
+    
+    if (e.target.classList.contains('mover')) {
+        target = t;
+        target.offsetX = e.clientX - target.getBoundingClientRect().left;
+        target.offsetY = e.clientY - target.getBoundingClientRect().top;
+    }
 });
 
 document.addEventListener('mouseup', (e) => {
