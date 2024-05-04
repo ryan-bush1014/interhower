@@ -1,6 +1,18 @@
 let root = document.querySelector(':root');
 let main = document.querySelector('#main');
 
+main.innerHTML = localStorage.getItem("content");
+
+window.addEventListener('beforeunload', () => {
+    localStorage.setItem("content", main.innerHTML);
+});
+
+document.addEventListener('keydown', function(event) {
+    if (event.altKey && event.key === 'l') {
+        main.innerHTML = "";
+    }
+  });
+
 function prevent_enter(e) {
     // User hits enter key
     if (e.keyCode === 13) {

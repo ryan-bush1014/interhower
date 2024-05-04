@@ -75,10 +75,10 @@ body, html {
     border: none !important;
 }
 
-.__toolbar-item {
-    /* stroke: var(--tc-accent); */
-    /* background: white !important; */
+.__toolbar {
+    background: white !important;
 }
+
 
 .editor {
     min-height: 1em;
