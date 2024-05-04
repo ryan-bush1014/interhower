@@ -27,6 +27,7 @@ setInterval(save, 60000);
 
 document.addEventListener('keydown', function(event) {
     if (event.altKey && event.key === 'l') {
+        localStorage.clear();
         ldb.clear();
         main.innerHTML = "";
     }
@@ -138,13 +139,13 @@ function mousemove(e) {
 }
 
 main.addEventListener('mousedown', mousedown);
-main.addEventListener('touchstart', (e) => {e.preventDefault(); mousedown(e)}, {passive: false});
+main.addEventListener('touchstart', (e) => mousedown);
 
 document.addEventListener('mouseup', mouseup);
-document.addEventListener('touchend', (e) => {e.preventDefault(); mouseup(e)}, {passive: false});
+document.addEventListener('touchend', mouseup);
 
 document.addEventListener('mousemove', mousemove);
-document.addEventListener('touchmove', (e) => {e.preventDefault(); mousemove(e)}, {passive: false});
+document.addEventListener('touchmove', mousemove);
 
 function hide_toggle() {
     for (elem of document.querySelectorAll('.trtrans')) {
