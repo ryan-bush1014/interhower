@@ -1,11 +1,24 @@
 let root = document.querySelector(':root');
 let main = document.querySelector('#main');
+dark_mode_status = false;
 
 main.innerHTML = localStorage.getItem("content");
+if (localStorage.getItem("darkMode") == "true") {
+    dark_mode();
+}
+
+function save() {
+    console.log("Saving...");
+    localStorage.setItem("content", main.innerHTML);
+    localStorage.setItem("darkMode", dark_mode_status.toString());
+    console.log("Saving complete");
+}
 
 window.addEventListener('beforeunload', () => {
-    localStorage.setItem("content", main.innerHTML);
+    save();
 });
+
+setInterval(save, 60000);
 
 document.addEventListener('keydown', function(event) {
     if (event.altKey && event.key === 'l') {
@@ -23,7 +36,8 @@ function prevent_enter(e) {
 }
 
 function dark_mode() {
-    let butt = document.querySelector('#dm');
+    dark_mode_status = !dark_mode_status;
+    let butt = document.querySelector('#dm'); 
     butt.innerText = (butt.innerText == '☼')? '☽' : '☼';
     let root_s = getComputedStyle(root);
     tc_main = root_s.getPropertyValue('--tc-main');
@@ -32,7 +46,6 @@ function dark_mode() {
     bg_accent = root_s.getPropertyValue('--bg-accent');
     bg_contrast = root_s.getPropertyValue('--bg-contrast');
     tc_contrast = root_s.getPropertyValue('--tc-contrast');
-    console.log(tc_main);
 
     root.style.setProperty('--tc-main', root_s.getPropertyValue('--tc-main-alt'));
     root.style.setProperty('--tc-accent', root_s.getPropertyValue('--tc-accent-alt'));
@@ -62,7 +75,6 @@ function add_drag() {
     existing = document.querySelectorAll('.draggable').length;
     drag = document.createElement('div');
     drag.innerHTML = loadPage('task.html');
-    console.log(drag.innerHTML);
     // drag.classList.add('thin');
     drag.classList.add('draggable');
     drag.classList.add('task');
