@@ -1,17 +1,22 @@
 let root = document.querySelector(':root');
 let main = document.querySelector('#main');
+
 dark_mode_status = false;
 
-main.innerHTML = localStorage.getItem("content");
-if (localStorage.getItem("darkMode") == "true") {
-    dark_mode();
-}
+ldb.get("content", (value => {
+    main.innerHTML = value;
+}));
+
+ldb.get("darkMode", (value) => {
+    if (value == "true") {
+        dark_mode();
+    }
+});
 
 function save() {
     console.log("Saving...");
-    localStorage.setItem("content", main.innerHTML);
-    localStorage.setItem("darkMode", dark_mode_status.toString());
-    console.log("Saving complete");
+    ldb.set("content", main.innerHTML);
+    ldb.set("darkMode", dark_mode_status.toString());
 }
 
 window.addEventListener('beforeunload', () => {
@@ -22,6 +27,7 @@ setInterval(save, 60000);
 
 document.addEventListener('keydown', function(event) {
     if (event.altKey && event.key === 'l') {
+        ldb.clear();
         main.innerHTML = "";
     }
   });
