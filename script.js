@@ -42,7 +42,7 @@ let target = false;
 function add_drag() {
     existing = document.querySelectorAll('.draggable').length;
     drag = document.createElement('div');
-    drag.innerHTML = '<span contenteditable onkeydown="prevent_enter(event)" class="taskname" placeholder="Task"></span><div class="minner center">-</div><div class="mover center">✥</div><textarea class="taskinfo contrast" placeholder="Information"></textarea>';
+    drag.innerHTML = `<span contenteditable onkeydown="prevent_enter(event)" class="taskname outfit-600" placeholder="Task"></span><div class="minner center">-</div><div class="mover center">✥</div><div class="editor contrast" id="edit-${existing+1}"><div data-tiny-editor data-formatblock="no" data-fontname="no" data-forecolor="no" data-justifyleft="no" data-outdent="no" data-indent="no" data-remove-format="no" class="outfit-400 taskinfo contrast" placeholder="Information"></div></div>`;
     // drag.classList.add('thin');
     drag.classList.add('draggable');
     drag.classList.add('task');
@@ -50,6 +50,7 @@ function add_drag() {
     drag.style['z-index'] = existing + 1;
     drag.clicked = false;
     main.appendChild(drag);
+    window.__tinyEditor.transformToEditor(document.querySelector('.taskinfo'));
     // setTimeout(() => {drag.classList.remove('thin')}, 50);
 }
 

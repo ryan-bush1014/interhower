@@ -24,18 +24,13 @@ body, html {
     font-size: min(4vw, 2.5em);
 }
 
-#headings * {
-    /* letter-spacing: 0.4em; */
-}
-
-
 .task {
     padding-left: 1em;
     padding-right: 1em;
     padding-top: 0.75em;
     padding-bottom: 0.75em;
-    width: clamp(2em, 20vw, 20em);
-    min-width: clamp(1em, 10vw, 10em);
+    width: 18em;
+    min-width: 18em;
     max-width: clamp(4em, 40vw, 40em);
     border-radius: 1em 1em 0 1em;
     position: absolute;
@@ -44,9 +39,8 @@ body, html {
     border: 0.125em solid var(--bg-main);
     transition: min-height 1s ease-in-out;
     resize: both;
-    overflow: auto;
     height: 12em;
-    min-height: 5em;
+    min-height: 9em;
     max-height: 92%;
     overflow: hidden;
 }
@@ -68,22 +62,37 @@ body, html {
     overflow: scroll;
 }
 
-.taskinfo {
+.__editor {
+    color: var(--tc-contrast) !important;
+    max-height: calc(100% - 5.5em) !important;
+    font-family: 'Outfit', sans-serif !important;
+    font-optical-sizing: auto !important;
+    font-weight: 400 !important;
+    font-style: normal !important;
+    font-size: 10pt !important;
+    background: none !important;
+    outline: none !important;
+    border: none !important;
+}
+
+.__toolbar-item {
+    /* stroke: var(--tc-accent); */
+    /* background: white !important; */
+}
+
+.editor {
     min-height: 1em;
-    resize: none;
     grid-column: 1/4;
     grid-row: 2;
     margin-top: 0.75em;
     margin-bottom: 0.25em;
-    word-wrap: break-word;
-    border: none;
 }
 
 .taskinfo {
     outline: none;
 }
 
-[placeholder]:empty::before {
+span[placeholder]:empty::before {
     content: attr(placeholder);
     opacity: 0.6;
 }
