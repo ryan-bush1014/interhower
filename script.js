@@ -42,7 +42,7 @@ let target = false;
 function add_drag() {
     existing = document.querySelectorAll('.draggable').length;
     drag = document.createElement('div');
-    drag.innerHTML = '<span contenteditable onkeydown="prevent_enter(event)" class="taskname" placeholder="Task title"></span><div class="mover center">✥</div><textarea class="taskinfo contrast" placeholder="Task info"></textarea>';
+    drag.innerHTML = '<span contenteditable onkeydown="prevent_enter(event)" class="taskname" placeholder="Task"></span><div class="mover center">✥</div><textarea class="taskinfo contrast" placeholder="Information"></textarea>';
     // drag.classList.add('thin');
     drag.classList.add('draggable');
     drag.classList.add('task');

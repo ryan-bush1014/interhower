@@ -36,7 +36,7 @@ body, html {
     padding-bottom: 0.75em;
     width: clamp(2em, 20vw, 20em);
     min-width: clamp(1em, 10vw, 10em);
-    max-width: clamp(3em, 30vw, 30em);
+    max-width: clamp(4em, 40vw, 40em);
     border-radius: 1em 1em 0 1em;
     position: absolute;
     display: grid;
@@ -75,6 +75,8 @@ body, html {
 }
 
 .taskinfo {
+    min-height: 0;
+    bottom: 0;
     resize: none;
     grid-column: 1/3;
     grid-row: 2;
@@ -82,6 +84,10 @@ body, html {
     margin-bottom: 0.25em;
     word-wrap: break-word;
     border: none;
+}
+
+.taskinfo {
+    outline: none;
 }
 
 [placeholder]:empty::before {
