@@ -51,10 +51,18 @@ function dark_mode() {
 
 let target = false;
 
+function loadPage(href) {
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.open("GET", href, false);
+    xmlhttp.send();
+    return xmlhttp.responseText;
+}
+
 function add_drag() {
     existing = document.querySelectorAll('.draggable').length;
     drag = document.createElement('div');
-    drag.innerHTML = `<span contenteditable onkeydown="prevent_enter(event)" class="taskname outfit-600" placeholder="Task"></span><div class="minner center">-</div><div class="mover center">✥</div><div class="editor contrast" id="edit-${existing+1}"><div data-tiny-editor data-formatblock="no" data-fontname="no" data-forecolor="no" data-justifyleft="no" data-outdent="no" data-indent="no" data-remove-format="no" class="outfit-400 taskinfo contrast" placeholder="Information"></div></div>`;
+    drag.innerHTML = loadPage('task.html');
+    console.log(drag.innerHTML);
     // drag.classList.add('thin');
     drag.classList.add('draggable');
     drag.classList.add('task');
@@ -91,6 +99,9 @@ function mousedown(e) {
 
     if (e.target.classList.contains('minner')) {
         t.classList.contains('min')? t.classList.remove('min') : t.classList.add('min')
+    }
+    if (e.target.classList.contains('del') && confirm("Are you sure you want to delete this?")) {
+        t.remove();
     }
 }
 
