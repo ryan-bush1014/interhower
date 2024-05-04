@@ -66,7 +66,7 @@ function add_drag() {
     // setTimeout(() => {drag.classList.remove('thin')}, 50);
 }
 
-main.addEventListener('mousedown', (e) => {
+function mousedown(e) {
     t = e.target;
     while (!t.classList.contains('draggable')) {
         t = t.parentElement;
@@ -80,6 +80,10 @@ main.addEventListener('mousedown', (e) => {
     t.style['z-index'] = drags.length;
     
     if (e.target.classList.contains('mover')) {
+        if (e.touches) {
+            e.clientX = e.touches[0].clientX;
+            e.clientY = e.touches[0].clientY;
+        }
         target = t;
         target.offsetX = e.clientX - target.getBoundingClientRect().left;
         target.offsetY = e.clientY - target.getBoundingClientRect().top;
@@ -88,17 +92,30 @@ main.addEventListener('mousedown', (e) => {
     if (e.target.classList.contains('minner')) {
         t.classList.contains('min')? t.classList.remove('min') : t.classList.add('min')
     }
-});
+}
 
-document.addEventListener('mouseup', (e) => {
+function mouseup(e) {
     target = false;
-});
+}
 
-document.addEventListener('mousemove', (e) => {
+function mousemove(e) {
     if (target) {
+        if (e.touches) {
+            e.clientX = e.touches[0].clientX;
+            e.clientY = e.touches[0].clientY;
+        }
         target.style['transform'] = `translate(clamp(0vw, ${100*(e.clientX - target.offsetX) / window.innerWidth}vw, calc(100vw - 100%)), clamp(0vh, ${100*(e.clientY - target.offsetY) / window.innerHeight}vh, calc(100vh - 100%)))`;
     }
-});
+}
+
+main.addEventListener('mousedown', mousedown);
+main.addEventListener('touchstart', (e) => {e.preventDefault(); mousedown(e)}, {passive: false});
+
+document.addEventListener('mouseup', mouseup);
+document.addEventListener('touchend', (e) => {e.preventDefault(); mouseup(e)}, {passive: false});
+
+document.addEventListener('mousemove', mousemove);
+document.addEventListener('touchmove', (e) => {e.preventDefault(); mousemove(e)}, {passive: false});
 
 function hide_toggle() {
     for (elem of document.querySelectorAll('.trtrans')) {
