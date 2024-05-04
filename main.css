@@ -40,28 +40,22 @@ body, html {
     border-radius: 1em 1em 0 1em;
     position: absolute;
     display: grid;
-    grid-template: min-content 1fr / 1fr min-content;
+    grid-template: min-content 1fr / 1fr min-content min-content;
     border: 0.125em solid var(--bg-main);
     transition: min-height 1s ease-in-out;
     resize: both;
     overflow: auto;
     height: 12em;
-    min-height: 1.95em;
+    min-height: 5em;
     max-height: 92%;
     overflow: hidden;
 }
 
-/* .min {
-    resize: none;
-    height: 2em;
-    min-height: 0;
+.min {
+    min-height: auto;
+    resize: horizontal;
+    max-height: 1.95em;
 }
-
-.min .taskinfo {
-    min-height: 0;
-    border: 0;
-    padding:0;
-} */
 
 .taskname {
     grid-row: 1;
@@ -75,10 +69,9 @@ body, html {
 }
 
 .taskinfo {
-    min-height: 0;
-    bottom: 0;
+    min-height: 1em;
     resize: none;
-    grid-column: 1/3;
+    grid-column: 1/4;
     grid-row: 2;
     margin-top: 0.75em;
     margin-bottom: 0.25em;
@@ -95,27 +88,30 @@ body, html {
     opacity: 0.6;
 }
 
-.thin {
-    min-width: 0 !important;
-}
-
-.mover {
+.minner, .mover {
     grid-row: 1;
     width: 1em;
     height: 1em;
     font-size: 18pt;
-    cursor: grab;
     padding: 0.2em;
-    border-radius: 1em;
-    margin-left: 0.5em;
+    /* border-radius: 1em; */
 }
 
-.mover:hover{
-    background-color: rgba(100,100,100,0.5);
+.mover {
+    cursor: grab;
+}
+
+.minner{
+    cursor: pointer;
+    margin-left: 0.5em;
 }
 
 .mover:active {
     cursor: grabbing;
+}
+
+.minner:hover, .mover:hover{
+    background-color: rgba(100,100,100,0.5);
 }
 
 .ui-button {

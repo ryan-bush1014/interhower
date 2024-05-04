@@ -42,7 +42,7 @@ let target = false;
 function add_drag() {
     existing = document.querySelectorAll('.draggable').length;
     drag = document.createElement('div');
-    drag.innerHTML = '<span contenteditable onkeydown="prevent_enter(event)" class="taskname" placeholder="Task"></span><div class="mover center">✥</div><textarea class="taskinfo contrast" placeholder="Information"></textarea>';
+    drag.innerHTML = '<span contenteditable onkeydown="prevent_enter(event)" class="taskname" placeholder="Task"></span><div class="minner center">-</div><div class="mover center">✥</div><textarea class="taskinfo contrast" placeholder="Information"></textarea>';
     // drag.classList.add('thin');
     drag.classList.add('draggable');
     drag.classList.add('task');
@@ -70,6 +70,10 @@ main.addEventListener('mousedown', (e) => {
         target = t;
         target.offsetX = e.clientX - target.getBoundingClientRect().left;
         target.offsetY = e.clientY - target.getBoundingClientRect().top;
+    }
+
+    if (e.target.classList.contains('minner')) {
+        t.classList.contains('min')? t.classList.remove('min') : t.classList.add('min')
     }
 });
 
