@@ -59,6 +59,7 @@ body, html {
     cursor: text;
     white-space: nowrap;
     overflow: scroll;
+    overflow: hidden;
 }
 
 .__editor {
@@ -72,6 +73,8 @@ body, html {
     background: none !important;
     outline: none !important;
     border: none !important;
+    overflow-x: hidden !important;
+    height: 100% !important;
 }
 
 .__toolbar {

@@ -1,5 +1,6 @@
 let root = document.querySelector(':root');
 let main = document.querySelector('#main');
+let debounce;
 
 dark_mode_status = false;
 
@@ -14,18 +15,17 @@ ldb.get("darkMode", (value) => {
 });
 
 function save() {
-    console.log("Saving...");
-    ldb.set("content", main.innerHTML);
-    ldb.set("darkMode", dark_mode_status.toString());
+    clearTimeout(debounce);
+    debounce = setTimeout(async () => {
+        console.log("Saving...");
+        a = await ldb.set("content", main.innerHTML);
+        b = await ldb.set("darkMode", dark_mode_status.toString());
+        console.log("Saved!");
+    }, 1000);
 }
 
-window.addEventListener('beforeunload', () => {
-    save();
-});
-
-setInterval(save, 60000);
-
 document.addEventListener('keydown', function(event) {
+    save();
     if (event.altKey && event.key === 'l') {
         localStorage.clear();
         ldb.clear();
@@ -126,6 +126,7 @@ function mousedown(e) {
 
 function mouseup(e) {
     target = false;
+    save();
 }
 
 function mousemove(e) {
