@@ -18,6 +18,13 @@ body, html {
     margin: 0;
     box-sizing: border-box;
     height: 100%;
+    
+}
+
+html * {
+    transition-property: color, background;
+    transition-duration: 100ms;
+    transition-timing-function: ease-in-out;
 }
 
 #headings {
@@ -48,6 +55,10 @@ body, html {
     min-height: 1.95em;
     resize: horizontal;
     max-height: 1.95em;
+}
+
+.min .editor {
+    display: none;
 }
 
 .taskname {
