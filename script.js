@@ -6,6 +6,8 @@ dark_mode_status = false;
 
 ldb.get("content", (value => {
     main.innerHTML = value;
+    document.querySelectorAll(".__toolbar").forEach((element) => element.remove());
+    document.querySelectorAll("[data-tiny-editor]").forEach((element) => window.__tinyEditor.transformToEditor(element));
 }));
 
 ldb.get("darkMode", (value) => {
@@ -21,7 +23,7 @@ function save() {
         a = await ldb.set("content", main.innerHTML);
         b = await ldb.set("darkMode", dark_mode_status.toString());
         console.log("Saved!");
-    }, 1000);
+    }, 500);
 }
 
 document.addEventListener('keydown', function(event) {
