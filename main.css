@@ -76,12 +76,18 @@ body, html {
     overflow-x: hidden !important;
     overflow-y: auto !important;
     height: 100% !important;
+    margin-top: 0 !important;
 }
 
 .__toolbar {
     background: white !important;
+    flex-wrap: nowrap !important;
+    justify-content: space-around !important;
 }
 
+.__toolbar-item {
+    width: 100% !important;
+}
 
 .editor {
     min-height: 1em;
@@ -130,7 +136,7 @@ span[placeholder]:empty::before {
 }
 
 .del:hover, .minner:hover, .mover:hover{
-    background-color: rgba(100,100,100,0.5);
+    background-color: rgba(255,255,255,0.1);
 }
 
 .ui-button {
